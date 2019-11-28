@@ -19,7 +19,7 @@ export class TaskListPage {
     }
   }
 
-  async changeTask() {
+  async changeTask(index: number) {
     const actionSheet = await this.actionSheetController.create({
       header: 'タスクの変更',
       buttons: [
@@ -28,7 +28,8 @@ export class TaskListPage {
           icon: 'trash',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            this.tasks.splice(index, 1);
+            localStorage.tasks = JSON.stringify(this.tasks);
           },
         },
         {
