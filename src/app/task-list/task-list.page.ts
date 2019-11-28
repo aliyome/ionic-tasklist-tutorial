@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-task-list',
@@ -11,7 +11,10 @@ export class TaskListPage {
   tasks: { name: string }[] = [{ name: 'タスク1' }, { name: 'タスク2' }];
   task: string;
 
-  constructor(private readonly actionSheetController: ActionSheetController) {}
+  constructor(
+    private readonly actionSheetController: ActionSheetController,
+    private readonly alertController: AlertController,
+  ) {}
 
   ionViewWillEnter() {
     if ('tasks' in localStorage) {
@@ -36,7 +39,7 @@ export class TaskListPage {
           text: '変更',
           icon: 'create',
           handler: () => {
-            console.log('Archive clicked');
+            this._renameTask(index);
           },
         },
         {
@@ -50,5 +53,31 @@ export class TaskListPage {
       ],
     });
     actionSheet.present();
+  }
+
+  private async _renameTask(index: number) {
+    const prompt = await this.alertController.create({
+      header: '変更後のタスク',
+      inputs: [
+        {
+          name: 'task',
+          placeholder: 'タスク',
+          value: this.tasks[index].name,
+        },
+      ],
+      buttons: [
+        {
+          text: '閉じる',
+        },
+        {
+          text: '保存',
+          handler: data => {
+            this.tasks[index] = { name: data.task };
+            localStorage.tasks = JSON.stringify(this.tasks);
+          },
+        },
+      ],
+    });
+    prompt.present();
   }
 }
