@@ -1,9 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>taskList</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let t of tasks">
+      <ion-label>{{t.name}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -5,11 +5,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './task-list.page.html',
   styleUrls: ['./task-list.page.scss'],
 })
-export class TaskListPage implements OnInit {
+export class TaskListPage {
+  title = 'タスク一覧';
+  tasks: { name: string }[] = [{ name: 'タスク1' }, { name: 'タスク2' }];
+  task: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    if ('tasks' in localStorage) {
+      this.tasks = JSON.parse(localStorage.tasks);
+    }
   }
-
 }
