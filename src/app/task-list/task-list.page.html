@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let t of tasks">
+    <ion-item *ngFor="let t of tasks" [button]="true" (click)="changeTask()">
       <ion-label>{{t.name}}</ion-label>
     </ion-item>
   </ion-list>
