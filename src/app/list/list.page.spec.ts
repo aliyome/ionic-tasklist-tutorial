@@ -10,8 +10,8 @@ describe('ListPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListPage ],
-      imports: [IonicModule.forRoot()]
+      declarations: [ListPage],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListPage);
@@ -28,5 +28,4 @@ describe('ListPage', () => {
     const items = listPage.querySelectorAll('ion-item');
     expect(items.length).toEqual(10);
   });
-
 });
